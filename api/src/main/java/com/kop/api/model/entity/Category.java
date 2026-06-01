@@ -20,8 +20,8 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(nullable = false, unique = true, length = 50)
-    private String categoryId;
+    @Column(nullable = false, unique = true, length = 20)
+    private String code;
     
     @Column(nullable = false, length = 100)
     private String name;
@@ -30,7 +30,7 @@ public class Category {
     private String icon;
     
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false)
     private CategoryType type;
     
     @Column(length = 20)
@@ -45,10 +45,7 @@ public class Category {
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
-        if (categoryId == null || categoryId.isEmpty()) {
-            categoryId = "cat_" + System.currentTimeMillis();
-        }
+        updatedAt = null;
     }
     
     @PreUpdate

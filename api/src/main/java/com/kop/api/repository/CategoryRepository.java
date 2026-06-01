@@ -12,11 +12,11 @@ import java.util.Optional;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     
-    Optional<Category> findByCategoryId(String categoryId);
+    Optional<Category> findByCode(String code);
     
     List<Category> findByType(Category.CategoryType type);
     
-    boolean existsByCategoryId(String categoryId);
+    boolean existsByCode(String code);
     
     @Query("SELECT c FROM Category c WHERE (:type IS NULL OR c.type = :type) ORDER BY c.name")
     List<Category> findWithFilters(@Param("type") Category.CategoryType type);
