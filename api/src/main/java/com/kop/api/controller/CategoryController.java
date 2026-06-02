@@ -20,7 +20,6 @@ import java.util.List;
 @RequestMapping("/api/v1/categories")
 @RequiredArgsConstructor
 @Tag(name = "Categories", description = "Category management APIs")
-@CrossOrigin(origins = "http://localhost:3000")
 public class CategoryController {
     
     private final CategoryService categoryService;
