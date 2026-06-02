@@ -54,5 +54,5 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     @Query("SELECT t FROM Transaction t ORDER BY t.date DESC, t.createdAt DESC")
     List<Transaction> findRecentTransactions(Pageable pageable);
     
-    Long countByCategoryId(String categoryId);
+    Long countByCategoryId(Long categoryId);
 }

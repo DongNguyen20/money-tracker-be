@@ -32,7 +32,7 @@ public class CategoryService {
         return categories.stream()
                 .map(category -> {
                     CategoryDTO dto = categoryMapper.toDTO(category);
-                    dto.setTransactionCount(transactionRepository.countByCategoryId(category.getCode()));
+                    dto.setTransactionCount(transactionRepository.countByCategoryId(category.getId()));
                     return dto;
                 })
                 .collect(Collectors.toList());
@@ -42,7 +42,7 @@ public class CategoryService {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + id));
         CategoryDTO dto = categoryMapper.toDTO(category);
-        dto.setTransactionCount(transactionRepository.countByCategoryId(category.getCode()));
+        dto.setTransactionCount(transactionRepository.countByCategoryId(category.getId()));
         return dto;
     }
     
@@ -50,7 +50,7 @@ public class CategoryService {
         Category category = categoryRepository.findByCode(code)
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with code: " + code));
         CategoryDTO dto = categoryMapper.toDTO(category);
-        dto.setTransactionCount(transactionRepository.countByCategoryId(category.getCode()));
+        dto.setTransactionCount(transactionRepository.countByCategoryId(category.getId()));
         return dto;
     }
     
@@ -91,7 +91,7 @@ public class CategoryService {
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + id));
         
         // Check if category has transactions
-        long transactionCount = transactionRepository.countByCategoryId(category.getCode());
+        long transactionCount = transactionRepository.countByCategoryId(category.getId());
         if (transactionCount > 0) {
             throw new BusinessException("Cannot delete category with existing transactions. Transaction count: " + transactionCount);
         }

@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ import java.util.List;
 @RequestMapping("/api/v1/categories")
 @RequiredArgsConstructor
 @Tag(name = "Categories", description = "Category management APIs")
-@SecurityRequirement(name = "X-API-Key")
+@CrossOrigin(origins = "http://localhost:3000")
 public class CategoryController {
     
     private final CategoryService categoryService;

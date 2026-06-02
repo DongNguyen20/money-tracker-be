@@ -30,7 +30,7 @@ public class Transaction {
     private TransactionType type;
     
     @Column(name = "category_id", nullable = false, length = 50)
-    private String categoryId;
+    private Long categoryId;
     
     @Column(length = 500)
     private String note;
