@@ -5,16 +5,23 @@ import com.kop.api.model.entity.Rent;
 import com.kop.api.service.RentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -39,16 +46,6 @@ public class RentController {
     @ApiResponse(responseCode = "200", description = "Successfully retrieved rents by status")
     public ResponseEntity<List<RentDTO>> getRentsByStatus(@PathVariable Rent.RentStatus status) {
         List<RentDTO> rents = rentService.getRentsByStatus(status);
-        return ResponseEntity.ok(rents);
-    }
-    
-    @GetMapping("/date-range")
-    @Operation(summary = "Get rents by date range", description = "Retrieve rent records within a date range")
-    @ApiResponse(responseCode = "200", description = "Successfully retrieved rents by date range")
-    public ResponseEntity<List<RentDTO>> getRentsByDateRange(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-        List<RentDTO> rents = rentService.getRentsByDateRange(startDate, endDate);
         return ResponseEntity.ok(rents);
     }
     
