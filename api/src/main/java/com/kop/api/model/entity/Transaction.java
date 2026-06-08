@@ -35,7 +35,7 @@ public class Transaction {
     @Column(length = 500)
     private String note;
     
-    @Column(nullable = false)
+    @Column(name = "date_of_origin", nullable = false)
     private LocalDate date;
     
     @Column(name = "created_at", nullable = false, updatable = false)
