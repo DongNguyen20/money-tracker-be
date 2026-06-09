@@ -2,24 +2,60 @@ package com.kop.api.mapper;
 
 import com.kop.api.model.dto.CategoryDTO;
 import com.kop.api.model.entity.Category;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.springframework.stereotype.Component;
 
-@Mapper(
-    componentModel = "spring",
-    nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE
-)
-public interface CategoryMapper {
+@Component
+public class CategoryMapper {
     
-    @Mapping(target = "transactionCount", ignore = true)
-    CategoryDTO toDTO(Category category);
+    public CategoryDTO toDTO(Category category) {
+        if (category == null) {
+            return null;
+        }
+        
+        return CategoryDTO.builder()
+                .id(category.getId())
+                .name(category.getName())
+                .code(category.getCode())
+                .icon(category.getIcon())
+                .color(category.getColor())
+                .type(category.getType())
+                .transactionCount(0L) // Will be set by service
+                .build();
+    }
     
-    Category toEntity(CategoryDTO dto);
+    public Category toEntity(CategoryDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+        
+        return Category.builder()
+                .name(dto.getName())
+                .code(dto.getCode())
+                .icon(dto.getIcon())
+                .color(dto.getColor())
+                .type(dto.getType())
+                .build();
+    }
     
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    void updateEntityFromDTO(CategoryDTO dto, @MappingTarget Category category);
+    public void updateEntityFromDTO(CategoryDTO dto, Category category) {
+        if (dto == null || category == null) {
+            return;
+        }
+        
+        if (dto.getName() != null) {
+            category.setName(dto.getName());
+        }
+        if (dto.getCode() != null) {
+            category.setCode(dto.getCode());
+        }
+        if (dto.getIcon() != null) {
+            category.setIcon(dto.getIcon());
+        }
+        if (dto.getColor() != null) {
+            category.setColor(dto.getColor());
+        }
+        if (dto.getType() != null) {
+            category.setType(dto.getType());
+        }
+    }
 }
