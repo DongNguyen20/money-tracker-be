@@ -20,7 +20,6 @@ import java.time.LocalDate;
 @RequestMapping("/api/v1/transactions")
 @RequiredArgsConstructor
 @Tag(name = "Transactions", description = "Transaction management APIs")
-@CrossOrigin(origins = "http://localhost:3000")
 public class TransactionController {
     
     private final TransactionService transactionService;
