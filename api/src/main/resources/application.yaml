@@ -8,7 +8,7 @@ spring:
     cors:
       allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000}
   datasource:
-    url: ${DB_URL:jdbc:postgresql://dpg-d8dtegernols739n4re0-a.singapore-postgres.render.com:5432/db_money_tracker}
+    url: ${DB_URL:jdbc:postgresql://ep-spring-moon-aph8nqmi-pooler.c-7.us-east-1.aws.neon.tech/neondb}
     username: ${DB_USERNAME:dongadmin}
     password: ${DB_PASSWORD:}
 
